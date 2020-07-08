@@ -3,12 +3,28 @@
     img(src="./assets/logo.png")
 
     br
-    input(v-model="name")
-    p {{ 'El nombre es: <<' + name + '>>'}}
+    .field
+      .label Vorname
+      .control
+        input(v-model="Vorname")
+    .field 
+      .label Nachname
+      .control
+        input(v-model="Nachname")
+    .field 
+      .label Name
+      .control
+        p {{ fullName }}
 
-    a(v-bind:href="url") Link
-    br
-    a(:href="url") Link 2
+    .field 
+      .label Jahr des Geburtstags
+      .control
+        input(v-model="JahrDesGeburtstag" type="date")
+
+    .field
+      .label Alter
+      .control
+        p {{ getAlter }}
     
 </template>
 
@@ -17,8 +33,25 @@ export default {
   name: 'app',
   data () {
     return {
-      name: '',
-      url: 'http://google.com'
+      Vorname: '',
+      Nachname: '',
+      JahrDesGeburtstag : ''
+    }
+  },
+
+  computed: {
+    fullName() {
+      return `${this.Vorname} ${this.Nachname}`
+    },
+    getAlter() {
+      const Jahr = (new Date()).getFullYear() - (new Date(this.JahrDesGeburtstag)).getFullYear();
+      console.log((new Date()).getFullYear());
+      console.log((new Date(this.JahrDesGeburtstag)).getFullYear());
+      console.log(Jahr);
+      if(Jahr)
+        return Jahr;
+      else
+        return '';
     }
   }
 }
