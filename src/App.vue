@@ -2,14 +2,14 @@
   #app
     img(src="./assets/logo.png")
 
-    p(v-show="showValue") {{ valueVShow }}
+    br
+    input(v-model="name")
+    p {{ 'El nombre es: <<' + name + '>>'}}
 
-    p(v-if="showValue") {{ valueVIf }}
-    p(v-else-if="showValue") {{ 'else-if' }}
-    p(v-else="showValue") {{ 'else' }}
-
-    ul
-      li(v-for="i in items") {{ i }}
+    a(v-bind:href="url") Link
+    br
+    a(:href="url") Link 2
+    
 </template>
 
 <script>
@@ -17,13 +17,8 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Hello VueJS',
-
-      showValue: false,
-      valueVShow: 'Valor vShow',
-      valueVIf: 'Valor vIf',
-
-      items: ['R', 'N', 'A', 'd', 'R', 'k', 'I', 'X']
+      name: '',
+      url: 'http://google.com'
     }
   }
 }
