@@ -1,13 +1,15 @@
 <template lang="pug">
   #app
     img(src="./assets/logo.png")
-    h1 {{ msg }}
-    p {{ 1+1 }}
-    p {{ 'Hola ' + 'mundo'}}
-    p {{ 'Hola ' + 'mundo ' + person.name }}
-    p {{ 'Hola ' + 'mundo ' + person.name.toUpperCase() }}
-    p {{ JSON.stringify(person) }}
-    p {{ true ? 'true' : false }}
+
+    p(v-show="showValue") {{ valueVShow }}
+
+    p(v-if="showValue") {{ valueVIf }}
+    p(v-else-if="showValue") {{ 'else-if' }}
+    p(v-else="showValue") {{ 'else' }}
+
+    ul
+      li(v-for="i in items") {{ i }}
 </template>
 
 <script>
@@ -16,9 +18,12 @@ export default {
   data () {
     return {
       msg: 'Hello VueJS',
-      person: {
-        name: "Isaac"
-      }
+
+      showValue: false,
+      valueVShow: 'Valor vShow',
+      valueVIf: 'Valor vIf',
+
+      items: ['R', 'N', 'A', 'd', 'R', 'k', 'I', 'X']
     }
   }
 }
