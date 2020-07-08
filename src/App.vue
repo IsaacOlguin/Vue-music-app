@@ -30,33 +30,39 @@
 
 <script>
 export default {
-  name: 'app',
-  data () {
+  name: "app",
+  data() {
     return {
-      Vorname: '',
-      Nachname: '',
-      JahrDesGeburtstag : ''
-    }
+      Vorname: "",
+      Nachname: "",
+      JahrDesGeburtstag: ""
+    };
   },
 
   computed: {
     fullName() {
-      return `${this.Vorname} ${this.Nachname}`
+      return `${this.Vorname} ${this.Nachname}`;
     },
     getAlter() {
-      const Jahr = (new Date()).getFullYear() - (new Date(this.JahrDesGeburtstag)).getFullYear();
-      console.log((new Date()).getFullYear());
-      console.log((new Date(this.JahrDesGeburtstag)).getFullYear());
+      const Jahr =
+        new Date().getFullYear() -
+        new Date(this.JahrDesGeburtstag).getFullYear();
+      console.log(new Date().getFullYear());
+      console.log(new Date(this.JahrDesGeburtstag).getFullYear());
       console.log(Jahr);
-      if(Jahr)
-        return Jahr;
-      else
-        return '';
+      if (Jahr) return Jahr;
+      else return "";
+    }
+  },
+
+  watch: {
+    Vorname(newValue, lastValue) {
+      console.log(newValue, lastValue);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  @import './scss/main.scss'
+@import "./scss/main.scss";
 </style>
