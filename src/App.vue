@@ -12,19 +12,26 @@
           )
           a.button.is-info.is-large(@click="suchen") Suchen
           a.button.is-danger.is-large(@click="reinigen") &times; Reinigen
-          p
-            small {{ searchMessage }}
+      .container
+        p
+          small {{ searchMessage }}
 
       .container.results
-        .columns 
-          .column(v-for="Lied in Lieder") {{ Lied.Name }} - {{ Lied.Saenger }}
+        p(v-for="Lied in Lieder") 
+          | {{ Lied.name }} - {{ Lied.artists[0].name }}
 </template>
 
-//[Nombre del elemento]{.[Nombre de la clase]|#[IdDelElemento]} 
+//[Nombre del elemento]{.[Nombre de la clase]|#[IdDelElemento]}
+/* .columns 
+          .column
+          */
 
 <script>
-const Lieder = [
-  {
+import trackService from "./services/track";
+
+const Lieder = [];
+/*
+{
     Name: 'Amor y Verdad',
     Saenger: 'CF'
   },
@@ -36,15 +43,15 @@ const Lieder = [
     Name: 'No Longer Slaves',
     Saenger: 'Bethel Music'
   }
-]
+*/
 
 export default {
-  name: 'app',
-  data () {
+  name: "app",
+  data() {
     return {
-      searchQuery : '',
+      searchQuery: "",
       Lieder: []
-    }
+    };
   },
 
   computed: {
@@ -55,20 +62,27 @@ export default {
 
   methods: {
     suchen() {
-      console.log(this.searchQuery);
-      this.Lieder = Lieder;
+      if (this.searchQuery !== "") {
+        console.log(this.searchQuery);
+        //this.Lieder = Lieder;
+
+        trackService.search(this.searchQuery).then(res => {
+          console.log(res);
+          this.Lieder = res.tracks.items;
+        });
+      }
     },
     reinigen() {
       this.Lieder = [];
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  @import './scss/main.scss';
+@import "./scss/main.scss";
 
-  .results {
-    margin-top: 50px
-  }
+.results {
+  margin-top: 50px;
+}
 </style>
