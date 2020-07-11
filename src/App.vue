@@ -1,5 +1,7 @@
 <template lang="pug">
   #app
+    app-header 
+    
     img(src="./assets/logo.png")
     
     section.section
@@ -19,6 +21,8 @@
       .container.results
         p(v-for="Lied in Lieder") 
           | {{ Lied.name }} - {{ Lied.artists[0].name }}
+
+    app-footer
 </template>
 
 //[Nombre del elemento]{.[Nombre de la clase]|#[IdDelElemento]}
@@ -28,25 +32,17 @@
 
 <script>
 import trackService from "./services/track";
+import AppFooter from './components/layout/AppFooter.vue';
+import AppHeader from './components/layout/AppHeader.vue';
 
 const Lieder = [];
-/*
-{
-    Name: 'Amor y Verdad',
-    Saenger: 'CF'
-  },
-  {
-    Name: 'Resplandecio',
-    Saenger: 'En Espiritu y en Verdad'
-  },
-  {
-    Name: 'No Longer Slaves',
-    Saenger: 'Bethel Music'
-  }
-*/
 
 export default {
   name: "app",
+  components: {
+    AppFooter: AppFooter,
+    AppHeader
+  },
   data() {
     return {
       searchQuery: "",
@@ -80,9 +76,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./scss/main.scss";
+  @import "./scss/main.scss";
 
-.results {
-  margin-top: 50px;
-}
+  .results {
+    margin-top: 50px;
+  }
 </style>
