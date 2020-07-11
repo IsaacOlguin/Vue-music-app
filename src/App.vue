@@ -5,7 +5,7 @@
 
     app-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
-      nav.nav.has-shadow
+      nav.nav
         .container
           input.input.is-large(
             type="text", 
@@ -21,7 +21,10 @@
       .container.results
         .columns.is-multiline
           .column.is-one-quarter(v-for="Lied in Lieder")
-            app-track(v-bind:track="Lied")
+            app-track(
+              v-bind:class="{ 'is-active': Lied.id === Liedgewaehlt }"
+              v-bind:track="Lied", 
+              v-on:waehlenLied="hoerenEreignis")
 
     app-footer
 </template>
@@ -53,7 +56,8 @@ export default {
     return {
       searchQuery: "",
       Lieder: [],
-      isLoading: false
+      isLoading: false,
+      Liedgewaehlt: ''
     };
   },
 
@@ -82,6 +86,9 @@ export default {
     },
     reinigen() {
       this.Lieder = [];
+    },
+    hoerenEreignis(idLied) {
+      this.Liedgewaehlt = idLied;
     }
   }
 };
@@ -92,5 +99,9 @@ export default {
 
   .results {
     margin-top: 50px;
+  }
+
+  .is-active {
+    border: 3px #23d168 solid;
   }
 </style>

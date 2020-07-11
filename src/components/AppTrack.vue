@@ -17,7 +17,7 @@
             nav.level
                 .level-left
                     a.level-item
-                        span.icon.is.small Enviar
+                        span.icon.is.small(@click="waehlenLied") Play
 </template>
 
 <script>
@@ -26,6 +26,11 @@ export default {
         track: {
             type: Object,
             required: true
+        }
+    },
+    methods: {
+        waehlenLied() {
+            this.$emit('waehlenLied', this.track.id)
         }
     }
 }
