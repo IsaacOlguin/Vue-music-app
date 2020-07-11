@@ -1,5 +1,7 @@
 <template lang="pug">
   #app
+    childComp
+
     img(src="./assets/logo.png")
     
     section.section
