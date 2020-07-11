@@ -21,29 +21,10 @@
           | {{ Lied.name }} - {{ Lied.artists[0].name }}
 </template>
 
-//[Nombre del elemento]{.[Nombre de la clase]|#[IdDelElemento]}
-/* .columns 
-          .column
-          */
-
 <script>
 import trackService from "./services/track";
 
 const Lieder = [];
-/*
-{
-    Name: 'Amor y Verdad',
-    Saenger: 'CF'
-  },
-  {
-    Name: 'Resplandecio',
-    Saenger: 'En Espiritu y en Verdad'
-  },
-  {
-    Name: 'No Longer Slaves',
-    Saenger: 'Bethel Music'
-  }
-*/
 
 export default {
   name: "app",
@@ -52,6 +33,31 @@ export default {
       searchQuery: "",
       Lieder: []
     };
+  },
+
+  beforeCreate: function() {
+    console.log("01. beforeCreate...");
+  },
+  created() { /* Short version de created: "function(){...}" */
+    console.log("02. created...");
+  },
+  beforeMount() {
+    console.log("03. beforeMount...");
+  },
+  mounted() {
+    console.log("04. mounted...");
+  },
+  beforeUpdate() {
+    console.log("05. beforeUpdate...");
+  },
+  updated() {
+    console.log("06. updated...");
+  },
+  beforeDestroy() {
+    console.log("07. beforeDestroy...");
+  },
+  destroyed() {
+    console.log("08. destroyed...");
   },
 
   computed: {
@@ -68,7 +74,9 @@ export default {
 
         trackService.search(this.searchQuery).then(res => {
           console.log(res);
-          this.Lieder = res.tracks.items;
+          if(!res) {
+            this.Lieder = res.tracks.items;
+          }
         });
       }
     },
