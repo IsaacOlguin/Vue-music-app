@@ -3,6 +3,9 @@
     app-header 
     img(src="./assets/logo.png")
 
+    app-notification(v-show="showNotification")
+      p(slot="cuerpoNotificacion") No se encontraron resultados
+
     app-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
       nav.nav
@@ -41,6 +44,7 @@ import AppHeader from '@/components/layout/AppHeader.vue';
 import AppLoader from '@/components/shared/AppLoader.vue';
 
 import AppTrack from '@/components/AppTrack.vue';
+import AppNotification from '@/components/shared/AppNotification.vue'
 
 const Lieder = [];
 
@@ -50,14 +54,16 @@ export default {
     AppFooter: AppFooter,
     AppHeader,
     AppTrack,
-    AppLoader
+    AppLoader,
+    AppNotification
   },
   data() {
     return {
       searchQuery: "",
       Lieder: [],
       isLoading: false,
-      Liedgewaehlt: ''
+      Liedgewaehlt: '',
+      showNotification: false
     };
   },
 
@@ -78,6 +84,7 @@ export default {
 
         trackService.search(this.searchQuery).then(res => {
           console.log(res);
+          this.showNotification = res.tracks.total === 0;
           this.Lieder = res.tracks.items;
           
           this.isLoading = false;
@@ -89,6 +96,15 @@ export default {
     },
     hoerenEreignis(idLied) {
       this.Liedgewaehlt = idLied;
+    }
+  },
+  watch: {
+    showNotification() {
+      if(this.showNotification){
+        setTimeout(() => {
+          this.showNotification = false;
+        }, 3000);
+      }
     }
   }
 };
