@@ -30,7 +30,9 @@ export default {
     },
     methods: {
         waehlenLied() {
-            this.$emit('waehlenLied', this.track.id)
+            this.$emit('waehlenLied', this.track.id);
+
+            this.$bus.$emit('set-track', this.track);
         }
     }
 }

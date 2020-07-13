@@ -11,15 +11,20 @@
         .container.has-text-centered
             h1.title App Music
             h2.subtitle Lists of songs  
+            app-player
 </template>
 
-<!--
-<script>
-export default {
 
+<script>
+import AppPlayer from '@/components/AppPlayer.vue';
+
+export default {
+    components: {
+        AppPlayer
+    }
 }
 </script>
-
+<!--
 <style>
 
 </style>

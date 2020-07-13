@@ -3,8 +3,12 @@
     app-header 
     img(src="./assets/logo.png")
 
-    app-notification(v-show="showNotification")
-      p(slot="cuerpoNotificacion") No se encontraron resultados
+    app-notification(
+        v-show="showNotification"
+        :typeOfNotification="this.hasData"
+      )
+      p(v-if="this.hasData" slot="cuerpoNotificacion") No se encontraron resultados
+      p(v-else slot="cuerpoNotificacion") {{ searchMessage }}
 
     app-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
@@ -63,7 +67,8 @@ export default {
       Lieder: [],
       isLoading: false,
       Liedgewaehlt: '',
-      showNotification: false
+      showNotification: false,
+      hasData: false
     };
   },
 
@@ -84,7 +89,8 @@ export default {
 
         trackService.search(this.searchQuery).then(res => {
           console.log(res);
-          this.showNotification = res.tracks.total === 0;
+          this.showNotification = true;
+          this.hasData = res.tracks.total === 0;
           this.Lieder = res.tracks.items;
           
           this.isLoading = false;
