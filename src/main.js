@@ -5,9 +5,11 @@ import App from './App.vue'
 import routes from './routes';
 
 import AppEventBus from '@/plugins/AppEventBus';
+import msToMm from '@/filters/ms-to-mm';
 
 Vue.use(VueRouter);
 Vue.use(AppEventBus);
+Vue.use(msToMm);
 
 const router = new VueRouter({ 
   routes: routes,
