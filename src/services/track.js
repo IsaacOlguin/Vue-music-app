@@ -17,6 +17,10 @@ const trackService = {
         .catch(error => {
             console.log(error);
         })
+    },
+    searchById: function(id) {
+        return musicService.get(`/tracks/${id}`)
+            .then(res => res.data);
     }
 };
 
