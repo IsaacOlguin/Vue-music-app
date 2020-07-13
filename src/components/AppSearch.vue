@@ -15,8 +15,9 @@ main
         .container
           input.input.is-large(
             type="text", 
-            placeholder="Lieder suchen" 
-            v-model="searchQuery"
+            placeholder="Lieder suchen", 
+            v-model="searchQuery", 
+            v-on:keyup.enter="suchen"
           )
           a.button.is-info.is-large(@click="suchen") Suchen
           a.button.is-danger.is-large(@click="reinigen") &times; Reinigen
