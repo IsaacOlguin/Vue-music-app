@@ -29,7 +29,8 @@ main
         .columns.is-multiline
           .column.is-one-quarter(v-for="Lied in Lieder")
             app-track(
-              v-bind:class="{ 'is-active': Lied.id === Liedgewaehlt }"
+              v-blur-directive="Lied.preview_url", 
+              v-bind:class="{ 'is-active': Lied.id === Liedgewaehlt }", 
               v-bind:track="Lied", 
               v-on:waehlenLied="hoerenEreignis")
 </template>

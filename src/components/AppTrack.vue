@@ -32,11 +32,14 @@ export default {
     },
     methods: {
         waehlenLied() {
-            this.$emit('waehlenLied', this.track.id);
+            if(!this.track.previe_url) { return ; }
 
+            this.$emit('waehlenLied', this.track.id);
             this.$bus.$emit('set-track', this.track);
         },
         InformationDesLieds(id) {
+            if(!this.track.previe_url) { return ; }
+            
             this.$router.push({ name: 'app-track-detail', params: {id: id} })
         }
     }
