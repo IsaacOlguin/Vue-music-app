@@ -2,7 +2,7 @@
 main
     //img(src="./assets/logo.png")
 
-    transition(name="move")
+    transition(name="fade")
       app-notification(
           v-show="showNotification"
           :typeOfNotification="this.hasData"
@@ -10,7 +10,7 @@ main
         p(v-if="this.hasData" slot="cuerpoNotificacion") No se encontraron resultados
         p(v-else slot="cuerpoNotificacion") {{ searchMessage }}
 
-    transition(name="move")
+    transition(name="fade")
       app-loader(v-show="isLoading")
 
     section.section(v-show="!isLoading")
