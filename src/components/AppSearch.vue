@@ -2,14 +2,17 @@
 main
     //img(src="./assets/logo.png")
 
-    app-notification(
-        v-show="showNotification"
-        :typeOfNotification="this.hasData"
-      )
-      p(v-if="this.hasData" slot="cuerpoNotificacion") No se encontraron resultados
-      p(v-else slot="cuerpoNotificacion") {{ searchMessage }}
+    transition(name="move")
+      app-notification(
+          v-show="showNotification"
+          :typeOfNotification="this.hasData"
+        )
+        p(v-if="this.hasData" slot="cuerpoNotificacion") No se encontraron resultados
+        p(v-else slot="cuerpoNotificacion") {{ searchMessage }}
 
-    app-loader(v-show="isLoading")
+    transition(name="move")
+      app-loader(v-show="isLoading")
+
     section.section(v-show="!isLoading")
       nav.nav
         .container
