@@ -11,8 +11,13 @@ transition(name="move")
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-    data() {
+    computed: {
+        ...mapState(['track'])
+    }
+    /*data() {
         return {
             track: {}
         }
@@ -21,7 +26,7 @@ export default {
         this.$bus.$on('set-track', (track) => {
             this.track = track;
         });
-    }
+    }*/
 }
 </script>
 
