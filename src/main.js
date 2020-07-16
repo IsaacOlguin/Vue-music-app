@@ -8,6 +8,7 @@ import store from '@/store';
 import AppEventBus from '@/plugins/AppEventBus';
 import msToMm from '@/filters/ms-to-mm';
 import blur from '@/directives/blur';
+import i18n from '@/AppI18n';
 
 Vue.use(VueRouter);
 Vue.use(AppEventBus);
@@ -23,5 +24,6 @@ new Vue({
   el: '#app',
   render: h => h(App),
   router: router,
-  store: store
+  store: store,
+  i18n
 })

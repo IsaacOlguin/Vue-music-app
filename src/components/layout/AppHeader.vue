@@ -7,8 +7,11 @@
                     .nav-item
                         strong Music App
                 .nav-right.nav-menu
-                    router-link.nav-item(v-bind:to=" {name: 'app-search' } ") Suchen
-                    router-link.nav-item(to="about") Wir
+                    a.nav-item(@click="selectLang('en')") English &nbsp;&nbsp;
+                    a.nav-item(@click="selectLang('es')") Español &nbsp;&nbsp;
+                    a.nav-item(@click="selectLang('de')") Deutsch &nbsp;&nbsp;
+                    router-link.nav-item(v-bind:to=" {name: 'app-search' } ") {{ $t('search') }} &nbsp;&nbsp;
+                    router-link.nav-item(to="about") {{ $t('about') }} &nbsp;&nbsp;
     .hero-body
         .container.has-text-centered
             h1.title App Music
@@ -23,6 +26,11 @@ import AppPlayer from '@/components/AppPlayer.vue';
 export default {
     components: {
         AppPlayer
+    },
+    methods: {
+        selectLang(lang) {
+            this.$i18n.locale = lang;
+        }
     }
 }
 </script>
